@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
-import AddIcon from "@mui/material/Add";
+import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { shades } from "../state";
+import { shades } from "../theme";
 import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +43,7 @@ const Item = ({ item, width }) => {
           style={{ cursor: "pointer" }}
         />
         <Box
-          display={isHovered ? "blocked" : "none"}
+          display={isHovered ? "block" : "none"}
           position="absolute"
           bottom="10%"
           left="0"
@@ -65,8 +65,6 @@ const Item = ({ item, width }) => {
                 <AddIcon />
               </IconButton>
             </Box>
-
-            {/* BUTTON */}
             <Button
               onClick={() => {
                 dispatch(addToCart({ item: { ...item, count } }));
@@ -82,7 +80,7 @@ const Item = ({ item, width }) => {
       <Box mt="3px">
         <Typography variant="subtitle2" color={neutral.dark}>
           {category
-            .replace(/([A-Z])/g, " $1 ")
+            ?.replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography>
         <Typography>{name}</Typography>
