@@ -1,15 +1,14 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Item from "../../components/Item";
+import { useDispatch } from "react-redux";
+import { IconButton, Box, Typography, Button, Tabs, Tab } from "@mui/material";
+
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
 import { addToCart } from "../../state";
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import Item from "../../components/Item";
 
 const ItemDetails = () => {
   const dispatch = useDispatch();
@@ -74,9 +73,9 @@ const ItemDetails = () => {
           <Box m="65px 0 25px 0">
             <Typography variant="h3">{item?.attributes?.name}</Typography>
             <Typography>${item?.attributes?.price}</Typography>
-            <Typography sx={{ mt: "20px" }}>
+            {/* <Typography sx={{ mt: "20px" }}>
               {item?.attributes?.longDescription}
-            </Typography>
+            </Typography> */}
           </Box>
 
           <Box display="flex" alignItems="center" minHeight="50px">
@@ -127,7 +126,15 @@ const ItemDetails = () => {
       </Box>
       <Box display="flex" flexWrap="wrap" gap="15px">
         {value === "description" && (
-          <div>{item?.attributes?.longDescription}</div>
+          <div>
+            {item &&
+            item.attributes &&
+            typeof item.attributes.longDescription === "string" ? (
+              item.attributes.longDescription
+            ) : (
+              <Typography>Long description not available</Typography>
+            )}
+          </div>
         )}
         {value === "reviews" && <div>reviews</div>}
       </Box>
