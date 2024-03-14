@@ -33,7 +33,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
 
             // create a stripe session
             const session = await stripe.checkout.sessions.create({
-                payment_method_types: ["card"],
+                payment_method_types: ["card", "paypal"],
                 customer_email: email,
                 mode: "payment",
                 success_url: "http://localhost:3000/checkout/success",
