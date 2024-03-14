@@ -3,8 +3,9 @@ import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
+import Shipping from "./Shipping";
+import Payment from "./Payment";
 import { shades } from "../../theme";
-import { loadStripe } from "@stripe/stripe-js";
 
 const initialValues = {
   billingAddress: {
@@ -13,6 +14,7 @@ const initialValues = {
     country: "",
     street1: "",
     street2: "",
+    city: "",
     state: "",
     zipCode: "",
   },
@@ -23,6 +25,7 @@ const initialValues = {
     country: "",
     street1: "",
     street2: "",
+    city: "",
     state: "",
     zipCode: "",
   },
@@ -33,13 +36,14 @@ const initialValues = {
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      firstName: yup.string().required("Required"),
-      lastName: yup.string().required("Required"),
-      country: yup.string().required("Required"),
-      street1: yup.string().required("Required"),
+      firstName: yup.string().required("required"),
+      lastName: yup.string().required("required"),
+      country: yup.string().required("required"),
+      street1: yup.string().required("required"),
       street2: yup.string(),
-      state: yup.string().required("Required"),
-      zipCode: yup.string().required("Required"),
+      city: yup.string().required("required"),
+      state: yup.string().required("required"),
+      zipCode: yup.string().required("required"),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
@@ -60,6 +64,10 @@ const checkoutSchema = [
         then: yup.string().required("required"),
       }),
       street2: yup.string(),
+      city: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
       state: yup.string().when("isSameAddress", {
         is: false,
         then: yup.string().required("required"),
@@ -72,7 +80,7 @@ const checkoutSchema = [
   }),
   yup.object().shape({
     email: yup.string().required("required"),
-    phonenumber: yup.string().required("equired"),
+    phoneNumber: yup.string().required("required"),
   }),
 ];
 
@@ -109,16 +117,18 @@ const Checkout = () => {
             errors,
             touched,
             handleBlur,
+            handleChange,
             handleSubmit,
             setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
               {isFirstStep && (
-                <shipping
+                <Shipping
                   values={values}
                   errors={errors}
                   touched={touched}
                   handleBlur={handleBlur}
+                  handleChange={handleChange}
                   setFieldValue={setFieldValue}
                 />
               )}
