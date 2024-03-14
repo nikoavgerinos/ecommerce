@@ -82,13 +82,13 @@ const MainCarousel = () => {
           >
             <Typography color={shades.secondary[200]}>-- NEW ITEMS</Typography>
             <Typography variant="h1">Summer Sale</Typography>
-            <Typography
+            {/* <Typography
               fontWeight="bold"
               color={shades.secondary[300]}
               sx={{ textDecoration: "underline" }}
             >
               Discover More
-            </Typography>
+            </Typography> */}
           </Box>
         </Box>
       ))}

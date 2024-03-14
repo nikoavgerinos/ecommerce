@@ -39,6 +39,7 @@ const Navbar = () => {
           onClick={() => navigate("/")}
           sx={{ "&:hover": { cursor: "pointer" } }}
           color={shades.secondary[500]}
+          fontWeight="bold"
         >
           LuxAura Designs
         </Box>
