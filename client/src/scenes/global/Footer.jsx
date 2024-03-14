@@ -59,7 +59,7 @@ const Footer = () => {
             LuxAura Design 123 Luxe Avenue Elegance City, Furnishville 54321
             Opulence County, Luxurious State, USA
           </Typography>
-          <Typography mb="30px">contact@luxauradesign.com</Typography>
+          <Typography mb="30px">contact@ luxauradesign .com</Typography>
           <Typography mb="30px">+1 (555) 123-4567</Typography>
         </Box>
       </Box>

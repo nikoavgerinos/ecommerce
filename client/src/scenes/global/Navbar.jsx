@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 import { setIsCartOpen } from "../../state";
 
-const Navbar = () => {
+function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
@@ -55,7 +55,6 @@ const Navbar = () => {
           <IconButton sx={{ color: "black" }}>
             <PersonOutline />
           </IconButton>
-
           <Badge
             badgeContent={cart.length}
             color="secondary"
@@ -84,6 +83,6 @@ const Navbar = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Navbar;
